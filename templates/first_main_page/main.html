@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military Focus - Ваш источник военных новостей</title>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Кастомные стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5; /* Светло-серый фон */
+            color: #333;
+        }
+
+        .news-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .news-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #444; /* Темно-серый цвет */
+        }
+
+        .news-item p {
+            font-size: 1rem;
+            color: #666; /* Серый цвет */
+        }
+
+        .news-item .date {
+            font-size: 0.9rem;
+            color: #999; /* Светло-серый цвет */
+            margin-bottom: 5px;
+        }
+
+        .news-item .read-more {
+            color: #ffffff; /* Белый цвет текста */
+            background-color: #666; /* Серый фон */
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .news-item .read-more:hover {
+            background-color: #444; /* Темнее при наведении */
+        }
+
+        .advertisement {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #999; /* Светло-серый цвет */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #666; /* Серый цвет */
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #808080 0%, #a9a9a9 100%); /* Серый градиент */
+            color: white;
+            padding: 80px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 100%; /* Растягиваем на всю ширину */
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .hero-section .btn {
+            background-color: #ffffff; /* Белый фон кнопки */
+            color: #666; /* Серый текст */
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-section .btn:hover {
+            background-color: #f0f0f0; /* Светлее при наведении */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .news-item h2 {
+                font-size: 1.2rem;
+            }
+
+            .news-item p {
+                font-size: 0.9rem;
+            }
+
+            .news-item img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .news-item h2 {
+                font-size: 1rem;
+            }
+
+            .news-item p {
+                font-size: 0.8rem;
+            }
+
+            .news-item img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Military Focus</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Аналитика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Видео</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light" id="darkModeToggle">
+                            <i class="fas fa-moon"></i> Темная тема
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero-секция (серый градиент) -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Military Focus</h1>
+            <p class="lead">Ваш источник актуальных военных новостей, аналитики и экспертных мнений</p>
+            <a href="https://militaryfocus.ru/feed" class="btn">Читать новости</a>
+        </div>
+    </section>
+
+    <!-- Новости -->
+    <div class="news-container">
+        <!-- Новость 1 -->
+        <div class="news-item">
+            <img src="https://via.placeholder.com/100" alt="Новость 1">
+            <div>
+                <div class="date">01.2025 23:42</div>
+                <h2>Lime размещен на обочине смешавшегося бумаги со стола в Белом доме Трампа</h2>
+                <p>АВКОМ ВСУ Спирский признал, что на Украине не способны перехватить "Ореховик".</p>
+                <a href="https://militaryfocus.ru/feed" class="read-more">Читать далее</a>
+            </div>
+        </div>
+
+        <!-- Новость 2 -->
+        <div class="news-item">
+            <img src="https://via.placeholder.com/100" alt="Новость 2">
+            <div>
+                <div class="date">19.01.2025 23:57</div>
+                <h2>NYT: РФ при заключении сделки с США по Украине сохранит освобожденные территории</h2>
+                <p>Новые подробности о переговорах между Россией и США.</p>
+                <a href="https://militaryfocus.ru/feed" class="read-more">Читать далее</a>
+            </div>
+        </div>
+
+        <!-- Новость 3 -->
+        <div class="news-item">
+            <img src="https://via.placeholder.com/100" alt="Новость 3">
+            <div>
+                <div class="date">19.01.2025 23:25</div>
+                <h2>Байден оставил недельные попытки подорвать президентство Трампа</h2>
+                <p>Политические новости из США.</p>
+                <a href="https://militaryfocus.ru/feed" class="read-more">Читать далее</a>
+            </div>
+        </div>
+
+        <!-- Новость 4 -->
+        <div class="news-item">
+            <img src="https://via.placeholder.com/100" alt="Новость 4">
+            <div>
+                <div class="date">19.01.2025 20:29</div>
+                <h2>Наступление широким фронтом: наши выходят на границы Китая</h2>
+                <p>Военные новости с фронта.</p>
+                <a href="https://militaryfocus.ru/feed" class="read-more">Читать далее</a>
+            </div>
+        </div>
+
+        <!-- Реклама -->
+        <div class="advertisement">
+            РЕКЛАМА @ vesti.ru
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <div class="footer">
+        &copy; 2023 Military Focus. Все права защищены.
+    </div>
+
+    <!-- Скрипты Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Темная тема
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i> Светлая тема' : '<i class="fas fa-moon"></i> Темная тема';
+        });
+
+        // Загрузка темной темы из localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Светлая тема';
+        }
+    </script>
+</body>
+</html>

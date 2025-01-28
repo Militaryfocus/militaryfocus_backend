@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Современная страница с новостями в газетном стиле. Актуальные статьи, последние события и аналитика.">
+    <meta name="keywords" content="новости, газета, статьи, события, аналитика">
+    <meta name="author" content="Ваше Имя">
+    <meta property="og:title" content="Новости">
+    <meta property="og:description" content="Современная страница с новостями в газетном стиле.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://вашсайт.ру/новости">
+    <link rel="canonical" href="https://вашсайт.ру/новости">
+    <link rel="preconnect" href="https://bootswatch.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://bootswatch.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://bootswatch.com/5/cosmo/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f9fa;
+            --card-border: #dddddd;
+            --btn-bg: #0d6efd;
+            --btn-text: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --card-border: #333333;
+            --btn-bg: #0d6efd;
+            --btn-text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 18px;
+            line-height: 1.6;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: opacity var(--transition-speed);
+        }
+
+        .card img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .card img.loaded {
+            opacity: 1;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+        }
+
+        .text-muted {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .btn-primary {
+            background-color: var(--btn-bg);
+            border-color: var(--btn-bg);
+            color: var(--btn-text);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: transform var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(360deg);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .card-text {
+                font-size: 1rem;
+            }
+
+            .text-muted {
+                font-size: 0.8rem;
+            }
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        .loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #0d6efd;
+            z-index: 1000;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .loading-indicator.active {
+            transform: scaleX(1);
+        }
+    </style>
+    <title>Новости | Актуальные события и аналитика</title>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Новости",
+        "url": "https://вашсайт.ру/новости",
+        "description": "Современная страница с новостями в газетном стиле."
+    }
+    </script>
+</head>
+<body>
+    <div class="loading-indicator" id="loading-indicator"></div>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+
+    <header class="text-center my-4" role="banner">
+        <h1>Новости</h1>
+        <a href="{% url 'main_page' %}" class="btn btn-primary" role="button">На главную</a>
+    </header>
+
+    <main class="container" role="main" id="main-content">
+        <div class="news-columns">
+            {% if articles %}
+                {% for article in articles %}
+                    <article class="card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <div class="card-body">
+                            <h2 class="card-title" itemprop="headline">{{ article.article_title }}</h2>
+                            {% if article.article_image %}
+                                <picture>
+                                    <source srcset="{{ article.article_image.url }}.webp" type="image/webp">
+                                    <img src="{{ article.article_image.url }}" class="img-fluid" alt="{{ article.article_title }}" loading="lazy" itemprop="image" onload="this.classList.add('loaded')">
+                                </picture>
+                            {% else %}
+                                <div class="img-placeholder">
+                                    <p>Изображение отсутствует</p>
+                                </div>
+                            {% endif %}
+                            <p class="card-text" itemprop="articleBody">{{ article.article_content }}</p>
+                            <small class="text-muted">
+                                Источник: <a rel="nofollow noopener noreferrer" href="{{ article.article_link }}" itemprop="publisher">{{ article.source }}</a>
+                            </small>
+                            <br>
+                            <small class="text-muted" itemprop="datePublished">{{ article.created_at|date:"d.m.Y H:i" }}</small>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">Новостей пока нет.</p>
+            {% endif %}
+        </div>
+    </main>
+
+    <button class="theme-toggle" aria-label="Переключить тему" onclick="toggleTheme()" role="button">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        const loadingIndicator = document.getElementById('loading-indicator');
+        window.addEventListener('load', () => {
+            loadingIndicator.classList.remove('active');
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            const themeToggle = document.querySelector('.theme-toggle i');
+            themeToggle.className = body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                observer.observe(img);
+            });
+        });
+    </script>
+</body>
+</html>
