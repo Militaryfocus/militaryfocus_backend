@@ -12,13 +12,10 @@
     <meta property="og:url" content="https://вашсайт.ру/новости">
     <link rel="canonical" href="https://вашсайт.ру/новости">
     <link rel="preconnect" href="https://bootswatch.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://bootswatch.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="https://bootswatch.com/5/cosmo/bootstrap.min.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
     <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --bg-color: #ffffff;
@@ -223,7 +220,7 @@
     </main>
 
     <button class="theme-toggle" aria-label="Переключить тему" onclick="toggleTheme()" role="button">
-        <i class="fas fa-moon"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 0a.5.5 0 0 1 .5.5V2A.5.5 0 0 1 6 2V.5A.5.5 0 0 1 6 0zm3.354 1.146a.5.5 0 1 1 .707.708l-1 1a.5.5 0 0 1-.707-.708l1-1zM3.5 3a.5.5 0 0 1 .5.5V5a.5.5 0 0 1-1 0V3.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V5a.5.5 0 0 1-1 0V3.5a.5.5 0 0 1 .5-.5zM2.146 6.646a.5.5 0 1 1 .708-.707l-1 1a.5.5 0 0 1-.708.707l-1-1zM12 6a3.5 3.5 0 1 1-6.708 1.042 4 4 0 1 0 5.666-5.666C10.5 1.263 11 2.58 11 4a2 2 0 0 1-2 2zM0 6.5A.5.5 0 0 1 .5 6H2a.5.5 0 0 1 0 1H.5A.5.5 0 0 1 0 6.5zM14 6a.5.5 0 0 1 .5.5V8a.5.5 0 0 1-1 0V6.5A.5.5 0 0 1 14 6zM2.146 10.146a.5.5 0 1 1 .708.708l-1 1a.5.5 0 1 1-.708-.708l1-1zM6 14a.5.5 0 0 1 .5.5V16A.5.5 0 0 1 6 16v-1.5a.5.5 0 0 1 .5-.5zm7.854-2.146a.5.5 0 1 1-.708.708l-1-1a.5.5 0 0 1 .708-.708l1 1zM14 8.5a.5.5 0 0 1 .5.5H16a.5.5 0 1 1 0 1h-1.5a.5.5 0 0 1-.5-.5z"/></svg>
     </button>
 
     <script>
@@ -235,14 +232,11 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.body.classList.add('dark-theme');
-            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
         }
 
         function toggleTheme() {
             const body = document.body;
             body.classList.toggle('dark-theme');
-            const themeToggle = document.querySelector('.theme-toggle i');
-            themeToggle.className = body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
         }
 
