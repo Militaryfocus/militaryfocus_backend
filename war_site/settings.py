@@ -79,19 +79,17 @@ CORS_ALLOW_HEADERS = (
 CORS_ALLOWED_ORIGINS = [
     "https://militaryfocus.ru",  # Адрес вашего Next.js приложения
 ]
-CORS_ALLOW_CREDENTIALS = True
-
 
 # Если используете сессионную аутентификацию или куки
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'war_site.urls'
 
-TEMPlATE_DIR = os.path.join(BASE_DIR, "templates")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPlATE_DIR,],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -164,7 +162,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 

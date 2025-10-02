@@ -4,7 +4,7 @@ import logging
 from django.conf import settings
 import django
 from asgiref.sync import sync_to_async
-import youtube_last_video_link, extract_text, extract_audio
+from . import youtube_last_video_link, extract_text, extract_audio
 from scrape_content_application.uniqalise_content_with_ai import get_content_to_change
 
 settings.configure(
@@ -43,18 +43,28 @@ async def main():
 @sync_to_async
 def save_article_to_db(video_data):
     if ArticleContent.objects.filter(article_link=video_data[2]).exists():
+        print(f"Видео {video_data[2]} уже существует в базе. Пропускаем.")
         return
 
     source_name = 'Канал "Военные сводки"'
     source = ContentSource.objects.filter(name=source_name).first()
+    
+    if not source:
+        print(f"Источник с названием {source_name} не найден.")
+        return
+    
+    # Получаем уникализированный контент для заголовка и текста
+    title_uniqualized = get_content_to_change(video_data[0])
+    content_uniqualized = get_content_to_change(video_data[1])
 
     article = ArticleContent(
-        title=get_content_to_change(video_data[0])['title_unic'].replace("##", "").replace("#", ""),
-        article_content=get_content_to_change(video_data[1])['article_unic'].replace("##", "").replace("#", ""),
+        article_title=title_uniqualized['title_unic'].replace("##", "").replace("#", ""),
+        article_content=content_uniqualized['article_unic'].replace("##", "").replace("#", ""),
         article_link=video_data[2],
         source=source
     )
     article.save()
+    print(f"Видео '{article.article_title}' успешно сохранено.")
 
 
 if __name__ == "__main__":
