@@ -147,6 +147,11 @@ class ArticleContent(models.Model):
     # Флаги
     is_featured = models.BooleanField("Рекомендуемая", default=False, db_index=True)
     is_ai_processed = models.BooleanField("Обработано ИИ", default=False)
+    
+    # Дополнительные поля для анализа
+    content_hash = models.CharField("Хеш контента", max_length=32, blank=True, db_index=True)
+    quality_score = models.FloatField("Оценка качества", default=0.0)
+    uniqueness_score = models.FloatField("Оценка уникальности", default=0.0)
 
     def save(self, *args, **kwargs):
         """Переопределяем save для автоматического подсчета слов"""
