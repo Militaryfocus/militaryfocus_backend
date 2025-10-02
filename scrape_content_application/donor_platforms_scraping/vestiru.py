@@ -10,8 +10,8 @@ import os
 import requests
 from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
+from django.db import IntegrityError
 from scrape_content_application.uniqalise_content_with_ai import get_content_to_change
-import os
 
 
 settings.configure(

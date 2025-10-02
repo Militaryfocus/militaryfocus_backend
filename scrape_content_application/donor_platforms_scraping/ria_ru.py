@@ -56,20 +56,25 @@ async def scrape_article_content(session, url) -> dict:
 @sync_to_async
 def save_article_to_db(article_data):
     if ArticleContent.objects.filter(article_link=article_data['link']).exists():
-        print(f"Статья с ссылкой {article_data['link']} уже существует. Пропускаем.")
+        print(f"РЎС‚Р°С‚СЊСЏ СЃ СЃСЃС‹Р»РєРѕР№ {article_data['link']} СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚. РџСЂРѕРїСѓСЃРєР°РµРј.")
         return
-    source_name = "Вести"
+    source_name = "Р’РµСЃС‚Рё"
     source = ContentSource.objects.filter(name=source_name).first()
     if not source:
-        print(f"Источник с названием {source_name} не найден.")
+        print(f"РСЃС‚РѕС‡РЅРёРє СЃ РЅР°Р·РІР°РЅРёРµРј {source_name} РЅРµ РЅР°Р№РґРµРЅ.")
         return
+    
+    # РџРѕР»СѓС‡Р°РµРј СѓРЅРёРєР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Р№ РєРѕРЅС‚РµРЅС‚
+    uniqualized = get_content_to_change(article_data['title'] + ' ' + article_data['content'])
+    
     article = ArticleContent(
-        title=article_data['title'],
-        article_content=get_content_to_change(article_data['content']),
+        article_title=uniqualized['title_unic'].replace("##", "").replace("#", ""),
+        article_content=uniqualized['article_unic'].replace("##", "").replace("#", ""),
         article_link=article_data['link'],
         source=source
     )
     article.save()
+    print(f"РЎС‚Р°С‚СЊСЏ '{article.article_title}' СѓСЃРїРµС€РЅРѕ СЃРѕС…СЂР°РЅРµРЅР°.")
     time.sleep(1.5)
 
 
