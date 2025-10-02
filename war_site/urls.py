@@ -1,27 +1,61 @@
 """
 URL configuration for war_site project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-urlpatterns = [
-    path('', include('feed_page.urls')),
-    path('admin/', admin.site.urls),
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
 
+
+@require_http_methods(["GET"])
+@cache_page(60 * 15)  # Cache for 15 minutes
+def health_check(request):
+    """Health check endpoint for monitoring"""
+    return JsonResponse({
+        'status': 'healthy',
+        'service': 'war_site_backend',
+        'version': '2.0.0'
+    })
+
+
+@require_http_methods(["GET"])
+def api_info(request):
+    """API information endpoint"""
+    return JsonResponse({
+        'name': 'War Site API',
+        'version': '2.0.0',
+        'description': 'Military news aggregation and AI processing API',
+        'endpoints': {
+            'legacy_feed': '/api/feed/',
+            'articles': '/api/v1/articles/',
+            'sources': '/api/v1/sources/',
+            'logs': '/api/v1/logs/',
+            'admin': '/admin/',
+            'health': '/health/',
+        },
+        'documentation': '/api/v1/',
+    })
+
+
+urlpatterns = [
+    # Admin
+    path('admin/', admin.site.urls),
+    
+    # Health and info endpoints
+    path('health/', health_check, name='health_check'),
+    path('api/', api_info, name='api_info'),
+    
+    # API endpoints
+    path('', include('scrape_content_application.urls')),
+    
+    # Legacy endpoints (for backward compatibility)
+    path('', include('feed_page.urls')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files in development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
